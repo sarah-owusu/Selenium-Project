@@ -21,8 +21,10 @@ public class ExplicitWaitDemo {
         driver.manage().window().maximize();
 
         WebElement txtUsername = myWait.
-                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input")));
-        txtUsername.sendKeys("Admin");
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath
+                        ("//*[@id='app']/div[1]/div/div[1]/div/div[2]/div[2]/form/div[1]/div/div[2]/input")));
+                 txtUsername.sendKeys
+                ("Admin");
 
         //ExplicitWait for password
         WebElement txtPassword = myWait.

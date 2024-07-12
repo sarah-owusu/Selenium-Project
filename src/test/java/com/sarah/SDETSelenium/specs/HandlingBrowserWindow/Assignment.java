@@ -13,39 +13,50 @@ import java.util.List;
 import java.util.Set;
 
 public class Assignment {
-    public static void main(String[] args) {
-        // https://testautomationpractice.blogspot.com/
-        // 0. Provide some String search for it
-        // 1. count on each link using for loop
-        // 2. click on each link using for loop
-        // 3. get the window ID's for every browser window
-        // 4. close specific browser window
+    public static void main(String[] args) throws InterruptedException {
+//         https://testautomationpractice.blogspot.com/
+//         0. Provide some String search for it
+//         1. count on each link using for loop
+//         2. click on each link using for loop
+//         3. get the window ID's for every browser window
+//         4. close specific browser window
 
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         String url = "https://testautomationpractice.blogspot.com/";
         driver.get(url);
         driver.manage().window().maximize();
 
-        WebElement searchText = driver.findElement(By.className("wikipedia-search-input"));
-        searchText.sendKeys("Selenium");
-        searchText.sendKeys(Keys.ENTER);
+        // searching a string in the search input field
+        WebElement searchInput =
+        driver.findElement(By.xpath("//input[@class='wikipedia-search-input']"));
 
-        // Setting all browser windows ids
-        Set<String> windowIDs = driver.getWindowHandles();
+        searchInput.sendKeys("Selenium");
+        searchInput.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
 
-        //approach 2, Converting set String into a list to be able to get the browser windows ID
-        List<String> windowList = new ArrayList(windowIDs);
+        //Retrieve and print the text entered
+        String enteredText = searchInput.getAttribute("value");
+        System.out.println("text entered is : " + enteredText);
 
-        //System.out.println("ID: " + windowList);
+        // Fetching all search result links
+        List<WebElement> searchResults = driver.findElements(By.xpath("//*[@id=\"wikipedia-search-result-link\"]"));
+        System.out.println("number of search result: " + searchResults.size());
 
-        List<WebElement> allLinks = driver.findElements(By.tagName("a"));
-        // 1. count on each link using for loop
-        for(WebElement links : allLinks){
-         links.click();
+        for (WebElement result: searchResults){
+            System.out.println("search result : " + result.getText());
 
+            //getting window id for every browser window
+            Set<String> windowHandles = driver.getWindowHandles();
+            //converting set to list
+            List<String> windowIds = new ArrayList<>(windowHandles);
+
+            System.out.println("window handles : " + windowIds);
         }
+
+
+
 
         //driver.close();
 
