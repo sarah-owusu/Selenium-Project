@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sarah</groupId>
-	<artifactId>SDETSelenium</artifactId>
+	<artifactId>c</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SDETSelenium</name>
 	<description>Demo project for Spring Boot</description>
